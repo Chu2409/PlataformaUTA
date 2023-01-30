@@ -95,8 +95,8 @@ INSERT INTO usuario_materia(materia_id, usuario_rol_id) VALUES
 (1, 4), (1, 5), (1, 6), (1, 7), (1, 11), (1, 12), (1, 13), (2, 4), (2, 5), (2, 6), (2, 7), (2, 11), (2, 12), (2, 13), (3, 4), (3, 5), (3, 6),(3, 7), (3, 11), (3, 12), (3, 13), 
 (4, 4), (4, 5), (4, 6), (4, 7), (4, 11), (4, 12), (4, 13), (5, 4), (5, 5), (5, 6), (5, 7), (5, 11), (5, 12), (5, 13);
 
-INSERT INTO tareas(tarea, descripcion, ubicacion) VALUES("Tarea de Progra", "Realizar un algoritmo de validacion de cedula ecuatoriana", "C:\Users\Daniel\Documents\Tareas"), 
-("Tarea de Calculo", "Realizar los ejercicios propuestos", "C:\Users\Daniel\Documents\Tareas");
+INSERT INTO tareas(tarea, descripcion, ubicacion) VALUES("Tarea de Progra", "Realizar un algoritmo de validacion de cedula ecuatoriana", "C:/Users/Daniel/Documents/Tareas"), 
+("Tarea de Calculo", "Realizar los ejercicios propuestos", "C:/Users/Daniel/Documents/Tareas");
 
 /*
 INSERT INTO usuario_materia_tarea(tarea_id, nota, envio, usuario_materia_id) VALUES(1, null, null, 1), (2, null, null, 2), (null, null, null, 3), (null, null, null, 4), (null, null, null, 5), (1, null, null, 6),

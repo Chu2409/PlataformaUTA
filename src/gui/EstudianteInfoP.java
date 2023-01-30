@@ -3,32 +3,57 @@ package gui;
 import com.github.sarxos.webcam.*;
 import datos.*;
 import domain.*;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.util.List;
+import java.io.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import utilities.Utilidad;
 
 public class EstudianteInfoP extends javax.swing.JPanel {
 
     private int estudianteId;
-    
+
     private UsuarioDAO usuarioDao = new UsuarioDAO();
-    
+
+    private Usuario estudiante;
+
+    private Webcam webcam = Webcam.getDefault();
+    private WebcamPanel cam = new WebcamPanel(this.webcam, new Dimension(270, 270), false);
+    private BufferedImage bufferedImage;
+
+    private String rutaFoto;
+
     public EstudianteInfoP(int estudianteId) {
-        initComponents();
+        this.initComponents();
+        this.webcam.close();
+
         this.estudianteId = estudianteId;
-        llenarDatos();
+        this.estudiante = usuarioDao.usuarioByUsuarioId(this.estudianteId);
+
+        this.llenarDatos();
+
+        this.webcam.setViewSize(WebcamResolution.VGA.getSize());
+        this.cam.setFillArea(true);
+        this.fotografiaP.setLayout(new FlowLayout());
+        this.fotografiaP.add(cam);
+
+        this.guardarBt.setVisible(false);
     }
 
     private void llenarDatos() {
-        Usuario estudiante = usuarioDao.usuarioByUsuarioId(this.estudianteId);
-        nombreFd.setText(estudiante.getNombre());
-        apellidoFd.setText(estudiante.getApellido());
-        direccionFd.setText(estudiante.getDireccion());
-        emailFd.setText(estudiante.getEmail());
-        
-        
-        
+        this.nombreFd.setText(this.estudiante.getNombre());
+        this.apellidoFd.setText(this.estudiante.getApellido());
+        this.direccionFd.setText(this.estudiante.getDireccion());
+        this.emailFd.setText(this.estudiante.getEmail());
+
+        ImageIcon foto = new ImageIcon(this.estudiante.getFotografia());
+        Icon iconoFoto = new ImageIcon(foto.getImage().getScaledInstance(270, 280, Image.SCALE_SMOOTH));
+        this.fotoLb.setIcon(iconoFoto);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,7 +74,9 @@ public class EstudianteInfoP extends javax.swing.JPanel {
         emailSp = new javax.swing.JSeparator();
         fotografiaTxt = new javax.swing.JLabel();
         fotografiaP = new javax.swing.JPanel();
-        fotografiaBt = new javax.swing.JLabel();
+        fotoLb = new javax.swing.JLabel();
+        guardarBt = new javax.swing.JPanel();
+        guardarTxt = new javax.swing.JLabel();
         hacerBt = new javax.swing.JPanel();
         hacerTxt = new javax.swing.JLabel();
 
@@ -115,36 +142,66 @@ public class EstudianteInfoP extends javax.swing.JPanel {
         fotografiaTxt.setFont(new java.awt.Font("Lucida Bright", 1, 16)); // NOI18N
         fotografiaTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fotografiaTxt.setText("Fotografía");
-        fondo1.add(fotografiaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 100, 100, -1));
+        fondo1.add(fotografiaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 90, 100, -1));
 
         fotografiaP.setBackground(new java.awt.Color(255, 255, 255));
+        fotografiaP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        fotografiaP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         fotografiaP.setPreferredSize(new java.awt.Dimension(270, 280));
-
-        fotografiaBt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        fotografiaBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        fotografiaBt.setPreferredSize(new java.awt.Dimension(270, 280));
-        fotografiaBt.addMouseListener(new java.awt.event.MouseAdapter() {
+        fotografiaP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fotografiaBtMouseClicked(evt);
+                fotografiaPMouseClicked(evt);
+            }
+        });
+        fotografiaP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        fotoLb.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fotoLb.setPreferredSize(new java.awt.Dimension(270, 280));
+        fotoLb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fotoLbMouseClicked(evt);
+            }
+        });
+        fotografiaP.add(fotoLb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 280));
+
+        fondo1.add(fotografiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 270, 280));
+
+        guardarBt.setBackground(new java.awt.Color(253, 240, 213));
+        guardarBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardarBt.setPreferredSize(new java.awt.Dimension(150, 40));
+
+        guardarTxt.setFont(new java.awt.Font("Lucida Bright", 0, 16)); // NOI18N
+        guardarTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        guardarTxt.setText("Capturar");
+        guardarTxt.setPreferredSize(new java.awt.Dimension(150, 40));
+        guardarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarTxtMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                guardarTxtMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                guardarTxtMouseExited(evt);
             }
         });
 
-        javax.swing.GroupLayout fotografiaPLayout = new javax.swing.GroupLayout(fotografiaP);
-        fotografiaP.setLayout(fotografiaPLayout);
-        fotografiaPLayout.setHorizontalGroup(
-            fotografiaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fotografiaPLayout.createSequentialGroup()
-                .addComponent(fotografiaBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout guardarBtLayout = new javax.swing.GroupLayout(guardarBt);
+        guardarBt.setLayout(guardarBtLayout);
+        guardarBtLayout.setHorizontalGroup(
+            guardarBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guardarBtLayout.createSequentialGroup()
+                .addComponent(guardarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        fotografiaPLayout.setVerticalGroup(
-            fotografiaPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fotografiaPLayout.createSequentialGroup()
-                .addComponent(fotografiaBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        guardarBtLayout.setVerticalGroup(
+            guardarBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarBtLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(guardarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        fondo1.add(fotografiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 140, 270, 280));
+        fondo1.add(guardarBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 420, -1, -1));
 
         hacerBt.setBackground(new java.awt.Color(253, 240, 213));
         hacerBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -181,7 +238,7 @@ public class EstudianteInfoP extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        fondo1.add(hacerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 490, -1, -1));
+        fondo1.add(hacerBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 500, -1, -1));
 
         add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -195,29 +252,14 @@ public class EstudianteInfoP extends javax.swing.JPanel {
     }//GEN-LAST:event_hacerTxtMouseEntered
 
     private void hacerTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hacerTxtMouseClicked
-        /*
-        String usuarioNombre = this.usuarioFd.getText().trim();
-        String clave = this.claveFd.getText();
-        String cedula = this.cedulaFd.getText().trim();
+
         String nombre = this.nombreFd.getText().trim();
         String apellido = this.apellidoFd.getText().trim();
+        String direccion = this.direccionFd.getText().trim();
         String email = this.emailFd.getText().trim();
-        String rol = this.rolCb.getSelectedItem().toString();
 
-        int rolId = 0;
-
-        if (usuarioNombre.isEmpty() || clave.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() ) {
-            JOptionPane.showMessageDialog(null, "Rellene todos los campos");
-            return;
-        }
-        if (usuarioNombre.length() > 60) {
-            JOptionPane.showMessageDialog(null, "Longitud maxima de caracteres en usuario: 60");
-            this.usuarioFd.requestFocus();
-            return;
-        }
-        if (clave.length() > 60) {
-            JOptionPane.showMessageDialog(null, "Longitud maxima de caracteres en clave: 60");
-            this.claveFd.requestFocus();
+        if (nombre.isEmpty() || apellido.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Rellene los campos obligatorios");
             return;
         }
         if (nombre.length() > 100) {
@@ -230,15 +272,17 @@ public class EstudianteInfoP extends javax.swing.JPanel {
             this.apellidoFd.requestFocus();
             return;
         }
-        if (usuarioNombre.contains("\"") || usuarioNombre.contains("\'")) {
-            JOptionPane.showMessageDialog(null, "Usuario incorrecto");
-            this.usuarioFd.requestFocus();
+        if (direccion.length() > 255) {
+            JOptionPane.showMessageDialog(null, "Longitud maxima de caracteres en direccion: 255");
+            this.direccionFd.requestFocus();
             return;
         }
-        if (!Utilidad.validarCedula(cedula)) {
-            JOptionPane.showMessageDialog(null, "Cedula incorrecta");
-            this.cedulaFd.requestFocus();
+        if (direccion.contains("\"") || direccion.contains("\'")) {
+            JOptionPane.showMessageDialog(null, "Direccion incorrecta");
+            this.direccionFd.requestFocus();
             return;
+        } else {
+            direccion = Utilidad.toMayuscula(direccion);
         }
         if (!Utilidad.validarNombre(nombre)) {
             JOptionPane.showMessageDialog(null, "Nombre incorrecto");
@@ -260,100 +304,74 @@ public class EstudianteInfoP extends javax.swing.JPanel {
             return;
         }
 
-        if (rol.equals("Estudiante")) {
-            rolId = 1;
-        } else if (rol.equals("Profesor")) {
-            rolId = 2;
-        }
-
-        Usuario usuarioAux = this.edicion ? this.usuario : new Usuario();
-        usuarioAux.setUsuario(usuarioNombre);
-        usuarioAux.setClave(clave);
-        usuarioAux.setCedula(cedula);
-        usuarioAux.setNombre(nombre);
-        usuarioAux.setApellido(apellido);
-        usuarioAux.setEmail(email);
-
-        UsuarioRol usuarioRol = new UsuarioRol();
+        estudiante.setNombre(nombre);
+        estudiante.setApellido(apellido);
+        estudiante.setDireccion(direccion);
+        estudiante.setEmail(email);
+        estudiante.setFotografia(this.rutaFoto);
 
         List<Usuario> usuarios = this.usuarioDao.seleccionar("");
-        if (!this.edicion) {
-            for (Usuario u : usuarios) {
-                if (usuarioNombre.equals(u.getUsuario())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe registro con este usuario");
-                    this.usuarioFd.requestFocus();
-                    return;
-                }
-                if (cedula.equals(u.getCedula())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe registro con esta cedula");
-                    this.cedulaFd.requestFocus();
-                    return;
-                }
-                if (email.equals(u.getEmail())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe registro con este correo");
-                    this.emailFd.requestFocus();
-                    return;
-                }
+
+        for (Usuario u : usuarios) {
+            if (u.getId() == this.estudiante.getId()) {
+                continue;
             }
-            this.usuarioDao.insertar(usuarioAux);
-
-            usuarioRol.setUsuarioId(this.usuarioDao.obtenerUltimo());
-            usuarioRol.setRolId(rolId);
-            this.usuarioRolDao.insertar(usuarioRol);
-        } else {
-            for (Usuario u : usuarios) {
-                if (u.getId() == usuarioAux.getId()) {
-                    continue;
-                }
-                if (usuarioNombre.equals(u.getUsuario())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe registro con este usuario");
-                    this.usuarioFd.requestFocus();
-                    return;
-                }
-                if (cedula.equals(u.getCedula())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe registro con esta cedula");
-                    this.cedulaFd.requestFocus();
-                    return;
-                }
-                if (email.equals(u.getEmail())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe registro con este correo");
-                    this.emailFd.requestFocus();
-                    return;
-                }
+            if (email.equals(u.getEmail())) {
+                JOptionPane.showMessageDialog(null, "Ya existe registro con este correo");
+                this.emailFd.requestFocus();
+                return;
             }
-            this.usuarioDao.actualizar(usuarioAux);
-
-            usuarioRol.setUsuarioId(this.usuarioId);
-            usuarioRol.setRolId(rolId);
-            usuarioRol.setId(this.usuarioRolDao.obtenerId(usuarioRol.getUsuarioId(), this.verificarRol(this.usuarioId)));
-            this.usuarioRolDao.actualizar(usuarioRol);
         }
-
-        String mensaje = this.edicion ? "modificado" : "registrado";
-        JOptionPane.showMessageDialog(null, "Usuario " + mensaje + " exitosamente");
-
-        if (!this.edicion) {
-            this.usuarioFd.setText("");
-            this.claveFd.setText("");
-            this.cedulaFd.setText("");
-            this.nombreFd.setText("");
-            this.apellidoFd.setText("");
-            this.emailFd.setText("");
-            this.usuarioFd.requestFocus();
-        }
-        */
+        
+        this.usuarioDao.actualizar(this.estudiante);
+        
+        JOptionPane.showMessageDialog(null, "Informacion actualizada exitosamente");
     }//GEN-LAST:event_hacerTxtMouseClicked
 
-    private void fotografiaBtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotografiaBtMouseClicked
-       Dimension dimension = new Dimension(270, 280);
-       Dimension dimensionCam = WebcamResolution.VGA.getSize();
-       Webcam webcam = Webcam.getDefault();
-       WebcamPanel cam = new WebcamPanel(webcam, dimension, true);
-       cam.setFillArea(true);
-       webcam.setViewSize(dimensionCam);
-       fotografiaP.add(cam);
-       
-    }//GEN-LAST:event_fotografiaBtMouseClicked
+    private void fotografiaPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotografiaPMouseClicked
+    }//GEN-LAST:event_fotografiaPMouseClicked
+
+    private void guardarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTxtMouseClicked
+        this.bufferedImage = this.webcam.getImage();
+
+        File salidaImagen = new File("C:/Users/Daniel/Pictures/Proyecto/" + this.estudiante.getCedula() + ".jpg");
+        this.rutaFoto = salidaImagen.getAbsolutePath();
+
+        try {
+            ImageIO.write(this.bufferedImage, "jpg", salidaImagen);
+        } catch (IOException ex) {
+        }
+
+        ImageIcon foto = new ImageIcon(this.webcam.getImage());
+        Icon iconFoto = new ImageIcon(foto.getImage().getScaledInstance(270, 280, Image.SCALE_SMOOTH));
+        this.fotoLb.setIcon(iconFoto);
+        this.fotoLb.setVisible(true);
+
+        this.cam.stop();
+        this.guardarBt.setVisible(false);
+        JOptionPane.showMessageDialog(null, "Foto actualizada");
+    }//GEN-LAST:event_guardarTxtMouseClicked
+
+    private void guardarTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTxtMouseEntered
+        this.guardarBt.setBackground(new Color(252, 230, 182));
+    }//GEN-LAST:event_guardarTxtMouseEntered
+
+    private void guardarTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTxtMouseExited
+        this.guardarBt.setBackground(new Color(253, 240, 213));
+    }//GEN-LAST:event_guardarTxtMouseExited
+
+    private void fotoLbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoLbMouseClicked
+        Thread hilo = new Thread() {
+            @Override
+            public void run() {
+                cam.start();
+                fotoLb.setVisible(false);
+                guardarBt.setVisible(true);
+            }
+        };
+        hilo.setDaemon(true);
+        hilo.start();
+    }//GEN-LAST:event_fotoLbMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -367,9 +385,11 @@ public class EstudianteInfoP extends javax.swing.JPanel {
     private javax.swing.JSeparator emailSp;
     private javax.swing.JLabel emailTxt;
     private javax.swing.JPanel fondo1;
-    private javax.swing.JLabel fotografiaBt;
+    private javax.swing.JLabel fotoLb;
     private javax.swing.JPanel fotografiaP;
     private javax.swing.JLabel fotografiaTxt;
+    private javax.swing.JPanel guardarBt;
+    private javax.swing.JLabel guardarTxt;
     private javax.swing.JPanel hacerBt;
     private javax.swing.JLabel hacerTxt;
     private javax.swing.JLabel infoTxt;

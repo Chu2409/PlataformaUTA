@@ -353,6 +353,9 @@ public class ProfesorRevisionP extends javax.swing.JPanel {
     private void revisarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_revisarTxtMouseClicked
         if (this.infoTb.getSelectedRow() > -1) {
             String ruta = (String) this.infoTb.getValueAt(this.infoTb.getSelectedRow(), 4);
+            if (ruta == null) {
+                return;
+            }
             File pdf = new File(ruta);
             try {
                 Desktop.getDesktop().open(pdf);

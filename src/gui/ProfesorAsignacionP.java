@@ -211,7 +211,8 @@ public class ProfesorAsignacionP extends javax.swing.JPanel {
 
     private void cargarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarTxtMouseClicked
         JFileChooser fc = new JFileChooser("C:/Users/Daniel/Desktop");
-
+        fc.setMultiSelectionEnabled(false);
+        
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.pdf", "pdf");
         fc.setFileFilter(filtro);
         int seleccion = fc.showOpenDialog(null);

@@ -1,8 +1,13 @@
 package test;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
 import datos.*;
 import domain.*;
+import java.awt.Dimension;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utilities.Utilidad;
 
@@ -67,10 +72,24 @@ public class Main {
         }
         */
 
+        /*
         String asignatura = JOptionPane.showInputDialog("ingrese");
         if (asignatura.contains("\"") || asignatura.contains("\'")) {
             System.out.println("si");
         }
+        */
+        
+        Webcam webcam = Webcam.getDefault();
+        webcam.setViewSize(new Dimension(320,240));
+        
+        WebcamPanel panel = new WebcamPanel(webcam);
+        panel.setMirrored(true);
+        
+        JFrame w = new JFrame();
+        w.add(panel);
+        w.pack();
+        w.setLocationRelativeTo(null);
+        w.setVisible(true);
     }
     
 }

@@ -300,6 +300,8 @@ public class EstudianteAsignacionesP extends javax.swing.JPanel {
     private void cargarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarTxtMouseClicked
         if (this.infoTb.getSelectedRow() > -1) {
             JFileChooser fc = new JFileChooser("C:/Users/Daniel/Desktop");
+            fc.setMultiSelectionEnabled(false);
+            
             FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.pdf", "pdf");
             fc.setFileFilter(filtro);
             int seleccion = fc.showOpenDialog(null);
@@ -339,6 +341,9 @@ public class EstudianteAsignacionesP extends javax.swing.JPanel {
     private void revisarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_revisarTxtMouseClicked
         if (this.infoTb.getSelectedRow() > -1) {
             String ruta = (String) this.infoTb.getValueAt(this.infoTb.getSelectedRow(), 2);
+            if (ruta == null) {
+                return;
+            }
             File pdf = new File(ruta);
             try {
                 Desktop.getDesktop().open(pdf);
