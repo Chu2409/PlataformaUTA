@@ -72,17 +72,15 @@ FOREIGN KEY(tarea_id) REFERENCES tareas(id),
 FOREIGN KEY(usuario_materia_id) REFERENCES usuario_materia(id)
 );
 
-
-
 INSERT INTO roles(rol) VALUES("Estudiante"), ("Profesor"), ("Administrador");
 
-INSERT INTO usuarios(usuario, clave, cedula, nombre, apellido, email) VALUES("daniel12", "1234", "0707047643", "Erick Daniel", "Zhu Ordoñez", "dzhu2409@uta.edu.ec"),
-("fernando", "1234", "0706164233", "Luis Fernando", "Zhu Ordoñez", "lzhu3004@uta.edu.ec"), ("mishel", "1234", "0751020942", "Maylin Mishel", "Davila Nuñez", "mdavila1903@uta.edu.ec"),
-("doris28", "1234", "0703224345", "Doris Giovanna", "Ordoñez Marquez", "dordonez@uta.edu.ec"), ("danny", "1234", "0703224337", "Danny Mauricio", "Ordoñez Marquez", "dmauricio@uta.edu.ec"),
-("jerovy", "1234", "0750286445", "Jerovy", "Yaguana", "jyaguana@uta.edu.ec"), ("pablito", "1234", "1850046317", "Pablo Martin", "Villacres Morales", "pvillacres@uta.edu.ec"),
-("milton", "1234", "0706388295", "Milton Sebastian", "Monteros Mogrovejo", "mmonteros@uta.edu.ec"), ("stefano", "1234", "0706388741", "Stefano", "Aus Gomez", "saus@uta.edu.ec"),
-("mogro", "1234", "0704879741", "Santiago", "Mogrovejo", "smogro@uta.edu.ec"), ("villota", "1234", "0753489871", "Franklin", "Villota", "villota@uta.edu.ec"),
-("manuel", "1234", "1801877729", "Manuel", "Turizo", "mturizo@uta.edu.ec"), ("valentina", "1234", "0913734661", "Valentina", "Davila", "vdavila@uta.edu.ec");
+INSERT INTO usuarios(usuario, clave, cedula, nombre, apellido, email) VALUES("daniel12", "1234", "0707047643", "Erick Daniel", "Zhu Ordoñez", "ezhu7643@uta.edu.ec"),
+("fernando", "1234", "0706164233", "Luis Fernando", "Zhu Ordoñez", "lzhu4233@uta.edu.ec"), ("mishel", "1234", "0751020942", "Maylin Mishel", "Davila Nuñez", "mdavila0942@uta.edu.ec"),
+("doris28", "1234", "0703224345", "Doris Giovanna", "Ordoñez Marquez", "dordonez4345@uta.edu.ec"), ("danny", "1234", "0703224337", "Danny Mauricio", "Ordoñez Marquez", "dmauricio4337@uta.edu.ec"),
+("jerovy", "1234", "0750286445", "Jerovy", "Yaguana", "jyaguana6445@uta.edu.ec"), ("pablito", "1234", "1850046317", "Pablo Martin", "Villacres Morales", "pvillacres6317@uta.edu.ec"),
+("milton", "1234", "0706388295", "Milton Sebastian", "Monteros Mogrovejo", "mmonteros8295@uta.edu.ec"), ("stefano", "1234", "0706388741", "Stefano", "Aus Gomez", "saus8741@uta.edu.ec"),
+("mogro", "1234", "0704879741", "Santiago", "Mogrovejo", "smogro9741@uta.edu.ec"), ("villota", "1234", "0753489871", "Franklin", "Villota", "villota9871@uta.edu.ec"),
+("manuel", "1234", "1801877729", "Manuel", "Turizo", "mturizo7729@uta.edu.ec"), ("valentina", "1234", "0913734661", "Valentina", "Davila", "vdavila4661@uta.edu.ec");
 
 INSERT INTO usuario_rol(usuario_id, rol_id) VALUES(1, 3), (2, 2), (3, 3), (4, 1), (5, 1), (6, 1), (7, 1), (8, 2), (9, 2), (10, 2), (11, 1), (12, 1), (13, 1);
 
@@ -95,17 +93,8 @@ INSERT INTO usuario_materia(materia_id, usuario_rol_id) VALUES
 (1, 4), (1, 5), (1, 6), (1, 7), (1, 11), (1, 12), (1, 13), (2, 4), (2, 5), (2, 6), (2, 7), (2, 11), (2, 12), (2, 13), (3, 4), (3, 5), (3, 6),(3, 7), (3, 11), (3, 12), (3, 13), 
 (4, 4), (4, 5), (4, 6), (4, 7), (4, 11), (4, 12), (4, 13), (5, 4), (5, 5), (5, 6), (5, 7), (5, 11), (5, 12), (5, 13);
 
-INSERT INTO tareas(tarea, descripcion, ubicacion) VALUES("Tarea de Progra", "Realizar un algoritmo de validacion de cedula ecuatoriana", "C:/Users/Daniel/Documents/Tareas"), 
-("Tarea de Calculo", "Realizar los ejercicios propuestos", "C:/Users/Daniel/Documents/Tareas");
-
-/*
-INSERT INTO usuario_materia_tarea(tarea_id, nota, envio, usuario_materia_id) VALUES(1, null, null, 1), (2, null, null, 2), (null, null, null, 3), (null, null, null, 4), (null, null, null, 5), (1, null, null, 6),
-(1, null, null, 7), (1, null, null, 8), (1, null, null, 9), (1, null, null, 10), (1, null, null, 11), (2, null, null, 12), (2, null, null, 13), (2, null, null, 14), (2, null, null, 15), (2, null, null, 16), 
-(2, null, null, 17), (2, null, null, 18), (2, null, null, 19), (null, null, null, 20), (null, null, null, 21), (null, null, null, 22), (null, null, null, 23), (null, null, null, 24), (null, null, null, 25),
-(null, null, null, 26), (null, null, null, 27), (null, null, null, 28), (null, null, null, 29), (null, null, null, 30), (null, null, null, 31), (null, null, null, 32), (null, null, null, 33), (null, null, null, 34),
-(null, null, null, 35), (null, null, null, 36), (null, null, null, 37), (null, null, null, 38), (null, null, null, 39), (null, null, null, 40);
-*/
-
+INSERT INTO tareas(tarea, descripcion, ubicacion) VALUES("Tarea de Progra", "Realizar un algoritmo de validacion de cedula ecuatoriana", "C:/Users/Daniel/Documents/Tareas/TareaProgra.pdf"), 
+("Tarea de Calculo", "Realizar los ejercicios propuestos", "C:/Users/Daniel/Documents/Tareas/TareaCalculo.pdf");
 
 INSERT INTO usuario_materia_tarea(tarea_id, nota, envio, usuario_materia_id) VALUES(1, null, null, 1), (2, null, null, 2), (1, null, null, 6),
 (1, null, null, 7), (1, null, null, 8), (1, null, null, 9), (1, null, null, 10), (1, null, null, 11), (2, null, null, 12), (2, null, null, 13), (2, null, null, 14), (2, null, null, 15), (2, null, null, 16), 

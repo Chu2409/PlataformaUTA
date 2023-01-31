@@ -350,7 +350,7 @@ public class EstudianteAsignacionesP extends javax.swing.JPanel {
             } catch (IOException ex) {
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione tarea a descargar");
+            JOptionPane.showMessageDialog(null, "Seleccione tarea a revisar");
         }
     }//GEN-LAST:event_revisarTxtMouseClicked
 
