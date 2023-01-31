@@ -189,7 +189,7 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    public List<Usuario> listarEstudiantes() {
+    public List<Usuario> listarEstudiantes() { //no usado
         Connection conn = Conexion.connect();
         PreparedStatement pst = null;
         ResultSet rs = null;

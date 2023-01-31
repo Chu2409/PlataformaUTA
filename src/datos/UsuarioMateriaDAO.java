@@ -49,40 +49,6 @@ public class UsuarioMateriaDAO {
         }
     }
 
-    public void actualizar(UsuarioMateria usuarioMateria) {
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-
-        try {
-            pst = conn.prepareStatement("UPDATE usuario_materia SET materia_id = ?, usuario_rol_id = ? WHERE id = ?");
-            pst.setInt(1, usuarioMateria.getMateriaId());
-            pst.setInt(2, usuarioMateria.getUsuarioRolId());
-            pst.setInt(3, usuarioMateria.getId());
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-    }
-
-    public void eliminar(int id) {
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-
-        try {
-            pst = conn.prepareStatement("DELETE FROM usuario_materia WHERE id = ?");
-            pst.setInt(1, id);
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-    }
-
     public List<Integer> verificarAluAso(int usuarioRolId) {
         Connection conn = Conexion.connect();
         PreparedStatement pst = null;
@@ -272,6 +238,5 @@ public class UsuarioMateriaDAO {
             Conexion.close(conn);
         }
         return id;
-    }
-    
+    }   
 }

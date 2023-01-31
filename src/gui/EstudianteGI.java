@@ -22,9 +22,19 @@ public class EstudianteGI extends javax.swing.JFrame {
         this.mostrarPanel(new InicioP());
         this.estudianteId = estudianteId;
 
-        this.estudiante = this.usuarioDao.usuarioByUsuarioId(estudianteId);
+        this.estudiante = this.usuarioDao.usuarioByUsuarioId(this.estudianteId);
         this.estudiante.setEstado(1);
         this.usuarioDao.actualizar(this.estudiante);
+    }
+
+    private void mostrarPanel(JPanel p) {
+        p.setSize(1280, 560);
+        p.setLocation(0, 0);
+
+        this.contenido.removeAll();
+        this.contenido.add(p, BorderLayout.CENTER);
+        this.contenido.revalidate();
+        this.contenido.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -355,16 +365,6 @@ public class EstudianteGI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostrarPanel(JPanel p) {
-        p.setSize(1280, 560);
-        p.setLocation(0, 0);
-
-        this.contenido.removeAll();
-        this.contenido.add(p, BorderLayout.CENTER);
-        this.contenido.revalidate();
-        this.contenido.repaint();
-    }
-
     private void salirTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseEntered
         this.salirBt.setBackground(new Color(193, 18, 31));
     }//GEN-LAST:event_salirTxtMouseEntered
@@ -374,6 +374,7 @@ public class EstudianteGI extends javax.swing.JFrame {
     }//GEN-LAST:event_salirTxtMouseExited
 
     private void salirTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseClicked
+        this.estudiante = this.usuarioDao.usuarioByUsuarioId(this.estudianteId);
         this.estudiante.setEstado(0);
         this.usuarioDao.actualizar(this.estudiante);
         System.exit(0);

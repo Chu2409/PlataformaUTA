@@ -282,7 +282,7 @@ public class ProfesorAsignacionP extends javax.swing.JPanel {
         List<Integer> estudiantes = this.usuarioMateriaDao.estudiantesIdByMateria(materiaId);
         for (Integer e : estudiantes) {
             UsuarioMateriaTarea umt = new UsuarioMateriaTarea();
-            umt.setTareaId(tareaDao.obtenerUltimo());
+            umt.setTareaId(this.tareaDao.obtenerUltimo());
             umt.setUsuarioMateriaId(e);
             this.usuarioMateriaTareaDao.insertar(umt);
         }

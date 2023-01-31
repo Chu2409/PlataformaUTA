@@ -105,30 +105,5 @@ public class UsuarioRolDAO {
             Conexion.close(conn);
         }
         return id;
-    }
-    
-    public int usuarioById(int usuarioRol) { // se usa en profesor
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-        ResultSet rs = null;       
-        int usuario = 0;
-
-        try {
-            pst = conn.prepareStatement("SELECT usuario_id FROM usuario_rol WHERE id = ?");
-            pst.setInt(1, usuarioRol);
-            rs = pst.executeQuery();
-            while (rs.next()) {            
-                usuario = rs.getInt("usuario_id");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-        return usuario;
-    }
-    
-    
+    }       
 }

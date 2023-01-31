@@ -1,30 +1,39 @@
 package gui;
 
-import datos.UsuarioDAO;
-import datos.UsuarioRolDAO;
+import datos.*;
 import domain.Usuario;
 import java.awt.*;
 import javax.swing.*;
 
 public class AdminGI extends javax.swing.JFrame {
-    
+
     private int adminId;
-    
+
     private static UsuarioRolDAO usuarioRolDao = new UsuarioRolDAO();
     private UsuarioDAO usuarioDao = new UsuarioDAO();
-    
+
     private Usuario admin;
-    
+
     private int xMouse, yMouse;
 
     public AdminGI(int adminId) {
         this.initComponents();
         AdminGI.mostrarPanel(new InicioP());
         this.adminId = adminId;
-        
+
         this.admin = this.usuarioDao.usuarioByUsuarioId(adminId);
         this.admin.setEstado(1);
         this.usuarioDao.actualizar(this.admin);
+    }
+
+    public static void mostrarPanel(JPanel p) {
+        p.setSize(1280, 560);
+        p.setLocation(0, 0);
+
+        AdminGI.contenido.removeAll();
+        AdminGI.contenido.add(p, BorderLayout.CENTER);
+        AdminGI.contenido.revalidate();
+        AdminGI.contenido.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -354,16 +363,6 @@ public class AdminGI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void mostrarPanel(JPanel p) {
-        p.setSize(1280, 560);
-        p.setLocation(0, 0);
-        
-        AdminGI.contenido.removeAll();
-        AdminGI.contenido.add(p, BorderLayout.CENTER);
-        AdminGI.contenido.revalidate();
-        AdminGI.contenido.repaint();
-    }
 
     private void salirTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseEntered
         this.salirBt.setBackground(new Color(193, 18, 31));

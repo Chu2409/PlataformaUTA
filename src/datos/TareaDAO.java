@@ -51,41 +51,6 @@ public class TareaDAO {
         }
     }
     
-    public void actualizar(Tarea tarea) {
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-
-        try {
-            pst = conn.prepareStatement("UPDATE tareas SET tarea = ?, descripcion = ?, ubicacion = ? WHERE id = ?");
-            pst.setString(1, tarea.getTarea());
-            pst.setString(2, tarea.getDescripcion());
-            pst.setString(3, tarea.getUbicacion());
-            pst.setInt(4, tarea.getId());
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-    }
-    
-    public void eliminar(int id) {
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-
-        try {
-            pst = conn.prepareStatement("DELETE FROM tareas WHERE id = ?");
-            pst.setInt(1, id);
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-    }
-    
     public int obtenerUltimo() {
         Connection conn = Conexion.connect();
         PreparedStatement pst = null;
@@ -186,6 +151,5 @@ public class TareaDAO {
             Conexion.close(conn);
         }
         return tareas;
-    }
-    
+    }  
 }

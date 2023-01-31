@@ -108,29 +108,6 @@ public class MateriaDAO {
         return materia;
     }
     
-    public String obtenerNombreMateria(int id) { //no se usa
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        String nombreMateria = null;
-
-        try {
-            pst = conn.prepareStatement("SELECT materia FROM materias WHERE id = " + id);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                nombreMateria = rs.getString("materia");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-        return nombreMateria;
-    }
-
-    
     public List<Materia> listarMatByName(String nombre) {
         Connection conn = Conexion.connect();
         PreparedStatement pst = null;

@@ -16,15 +16,14 @@ public class InvitadoCursoP extends javax.swing.JPanel {
         this.listarTabla();
     }
 
-    public void listarTabla() {
+    private void listarTabla() {
         DefaultTableModel model = (DefaultTableModel) this.cursosTb.getModel();
         model.setRowCount(0);
         
         List<Curso> cursos = this.cursoDao.seleccionar("");        
         for (Curso c : cursos) {
             model.addRow(new Object[]{c.getId(), c.getCurso()});
-        }
-        
+        }     
     }
 
     @SuppressWarnings("unchecked")

@@ -40,7 +40,7 @@ public class EstudianteInfoP extends javax.swing.JPanel {
         this.fotografiaP.setLayout(new FlowLayout());
         this.fotografiaP.add(cam);
 
-        this.guardarBt.setVisible(false);
+        this.capturarBt.setVisible(false);
     }
 
     private void llenarDatos() {
@@ -75,8 +75,8 @@ public class EstudianteInfoP extends javax.swing.JPanel {
         fotografiaTxt = new javax.swing.JLabel();
         fotografiaP = new javax.swing.JPanel();
         fotoLb = new javax.swing.JLabel();
-        guardarBt = new javax.swing.JPanel();
-        guardarTxt = new javax.swing.JLabel();
+        capturarBt = new javax.swing.JPanel();
+        capturarTxt = new javax.swing.JLabel();
         hacerBt = new javax.swing.JPanel();
         hacerTxt = new javax.swing.JLabel();
 
@@ -166,42 +166,42 @@ public class EstudianteInfoP extends javax.swing.JPanel {
 
         fondo1.add(fotografiaP, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, 270, 280));
 
-        guardarBt.setBackground(new java.awt.Color(253, 240, 213));
-        guardarBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardarBt.setPreferredSize(new java.awt.Dimension(150, 40));
+        capturarBt.setBackground(new java.awt.Color(253, 240, 213));
+        capturarBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        capturarBt.setPreferredSize(new java.awt.Dimension(150, 40));
 
-        guardarTxt.setFont(new java.awt.Font("Lucida Bright", 0, 16)); // NOI18N
-        guardarTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        guardarTxt.setText("Capturar");
-        guardarTxt.setPreferredSize(new java.awt.Dimension(150, 40));
-        guardarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+        capturarTxt.setFont(new java.awt.Font("Lucida Bright", 0, 16)); // NOI18N
+        capturarTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        capturarTxt.setText("Capturar");
+        capturarTxt.setPreferredSize(new java.awt.Dimension(150, 40));
+        capturarTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                guardarTxtMouseClicked(evt);
+                capturarTxtMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                guardarTxtMouseEntered(evt);
+                capturarTxtMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                guardarTxtMouseExited(evt);
+                capturarTxtMouseExited(evt);
             }
         });
 
-        javax.swing.GroupLayout guardarBtLayout = new javax.swing.GroupLayout(guardarBt);
-        guardarBt.setLayout(guardarBtLayout);
-        guardarBtLayout.setHorizontalGroup(
-            guardarBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(guardarBtLayout.createSequentialGroup()
-                .addComponent(guardarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout capturarBtLayout = new javax.swing.GroupLayout(capturarBt);
+        capturarBt.setLayout(capturarBtLayout);
+        capturarBtLayout.setHorizontalGroup(
+            capturarBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(capturarBtLayout.createSequentialGroup()
+                .addComponent(capturarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        guardarBtLayout.setVerticalGroup(
-            guardarBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, guardarBtLayout.createSequentialGroup()
+        capturarBtLayout.setVerticalGroup(
+            capturarBtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, capturarBtLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(guardarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(capturarTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        fondo1.add(guardarBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 420, -1, -1));
+        fondo1.add(capturarBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 420, -1, -1));
 
         hacerBt.setBackground(new java.awt.Color(253, 240, 213));
         hacerBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -277,12 +277,16 @@ public class EstudianteInfoP extends javax.swing.JPanel {
             this.direccionFd.requestFocus();
             return;
         }
-        if (direccion.contains("\"") || direccion.contains("\'")) {
-            JOptionPane.showMessageDialog(null, "Direccion incorrecta");
-            this.direccionFd.requestFocus();
-            return;
+        if (!direccion.isEmpty()) {
+            if (direccion.contains("\"") || direccion.contains("\'")) {
+                JOptionPane.showMessageDialog(null, "Direccion incorrecta");
+                this.direccionFd.requestFocus();
+                return;
+            } else {
+                direccion = Utilidad.toMayuscula(direccion);
+            }
         } else {
-            direccion = Utilidad.toMayuscula(direccion);
+            direccion = null;
         }
         if (!Utilidad.validarNombre(nombre)) {
             JOptionPane.showMessageDialog(null, "Nombre incorrecto");
@@ -304,11 +308,11 @@ public class EstudianteInfoP extends javax.swing.JPanel {
             return;
         }
 
-        estudiante.setNombre(nombre);
-        estudiante.setApellido(apellido);
-        estudiante.setDireccion(direccion);
-        estudiante.setEmail(email);
-        estudiante.setFotografia(this.rutaFoto);
+        this.estudiante.setNombre(nombre);
+        this.estudiante.setApellido(apellido);
+        this.estudiante.setDireccion(direccion);
+        this.estudiante.setEmail(email);
+        this.estudiante.setFotografia(this.rutaFoto);
 
         List<Usuario> usuarios = this.usuarioDao.seleccionar("");
 
@@ -322,16 +326,16 @@ public class EstudianteInfoP extends javax.swing.JPanel {
                 return;
             }
         }
-        
+
         this.usuarioDao.actualizar(this.estudiante);
-        
+
         JOptionPane.showMessageDialog(null, "Informacion actualizada exitosamente");
     }//GEN-LAST:event_hacerTxtMouseClicked
 
     private void fotografiaPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotografiaPMouseClicked
     }//GEN-LAST:event_fotografiaPMouseClicked
 
-    private void guardarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTxtMouseClicked
+    private void capturarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_capturarTxtMouseClicked
         this.bufferedImage = this.webcam.getImage();
 
         File salidaImagen = new File("C:/Users/Daniel/Pictures/Proyecto/" + this.estudiante.getCedula() + ".jpg");
@@ -348,17 +352,17 @@ public class EstudianteInfoP extends javax.swing.JPanel {
         this.fotoLb.setVisible(true);
 
         this.cam.stop();
-        this.guardarBt.setVisible(false);
+        this.capturarBt.setVisible(false);
         JOptionPane.showMessageDialog(null, "Foto actualizada");
-    }//GEN-LAST:event_guardarTxtMouseClicked
+    }//GEN-LAST:event_capturarTxtMouseClicked
 
-    private void guardarTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTxtMouseEntered
-        this.guardarBt.setBackground(new Color(252, 230, 182));
-    }//GEN-LAST:event_guardarTxtMouseEntered
+    private void capturarTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_capturarTxtMouseEntered
+        this.capturarBt.setBackground(new Color(252, 230, 182));
+    }//GEN-LAST:event_capturarTxtMouseEntered
 
-    private void guardarTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTxtMouseExited
-        this.guardarBt.setBackground(new Color(253, 240, 213));
-    }//GEN-LAST:event_guardarTxtMouseExited
+    private void capturarTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_capturarTxtMouseExited
+        this.capturarBt.setBackground(new Color(253, 240, 213));
+    }//GEN-LAST:event_capturarTxtMouseExited
 
     private void fotoLbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fotoLbMouseClicked
         Thread hilo = new Thread() {
@@ -366,7 +370,7 @@ public class EstudianteInfoP extends javax.swing.JPanel {
             public void run() {
                 cam.start();
                 fotoLb.setVisible(false);
-                guardarBt.setVisible(true);
+                capturarBt.setVisible(true);
             }
         };
         hilo.setDaemon(true);
@@ -378,6 +382,8 @@ public class EstudianteInfoP extends javax.swing.JPanel {
     private javax.swing.JTextField apellidoFd;
     private javax.swing.JSeparator apellidoSp;
     private javax.swing.JLabel apellidoTxt;
+    private javax.swing.JPanel capturarBt;
+    private javax.swing.JLabel capturarTxt;
     private javax.swing.JTextField direccionFd;
     private javax.swing.JSeparator direccionSp;
     private javax.swing.JLabel direccionTxt;
@@ -388,8 +394,6 @@ public class EstudianteInfoP extends javax.swing.JPanel {
     private javax.swing.JLabel fotoLb;
     private javax.swing.JPanel fotografiaP;
     private javax.swing.JLabel fotografiaTxt;
-    private javax.swing.JPanel guardarBt;
-    private javax.swing.JLabel guardarTxt;
     private javax.swing.JPanel hacerBt;
     private javax.swing.JLabel hacerTxt;
     private javax.swing.JLabel infoTxt;

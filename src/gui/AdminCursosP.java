@@ -22,7 +22,7 @@ public class AdminCursosP extends javax.swing.JPanel {
     }
 
     private void listarCursos() {
-        DefaultTableModel model = (DefaultTableModel) infoTb.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.infoTb.getModel();
         model.setRowCount(0);
         
         List<Curso> cursos = this.cursoDao.seleccionar("");
@@ -442,8 +442,7 @@ public class AdminCursosP extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Curso " + mensaje + " exitosamente");
         
         this.listarCursos();
-        this.dinamic.setVisible(false);
-        
+        this.dinamic.setVisible(false);     
     }//GEN-LAST:event_hacerTxtMouseClicked
 
     private void hacerTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hacerTxtMouseEntered
@@ -455,7 +454,7 @@ public class AdminCursosP extends javax.swing.JPanel {
     }//GEN-LAST:event_hacerTxtMouseExited
 
     private void buscarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarTxtMouseClicked
-        DefaultTableModel model = (DefaultTableModel) infoTb.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.infoTb.getModel();
         model.setRowCount(0);
         
         String cursoBuscar = this.buscarPorCFd.getText().trim();

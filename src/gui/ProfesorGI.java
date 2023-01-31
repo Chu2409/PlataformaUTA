@@ -8,22 +8,32 @@ import javax.swing.*;
 public class ProfesorGI extends javax.swing.JFrame {
 
     private int profesorId;
-    
+
     private static UsuarioRolDAO usuarioRolDao = new UsuarioRolDAO();
     private UsuarioDAO usuarioDao = new UsuarioDAO();
-    
+
     private Usuario profesor;
-    
+
     private int xMouse, yMouse;
 
     public ProfesorGI(int profesorId) {
         this.initComponents();
         this.mostrarPanel(new InicioP());
         this.profesorId = profesorId;
-        
+
         this.profesor = this.usuarioDao.usuarioByUsuarioId(profesorId);
         this.profesor.setEstado(1);
         this.usuarioDao.actualizar(this.profesor);
+    }
+
+    private void mostrarPanel(JPanel p) {
+        p.setSize(1280, 560);
+        p.setLocation(0, 0);
+
+        this.contenido.removeAll();
+        this.contenido.add(p, BorderLayout.CENTER);
+        this.contenido.revalidate();
+        this.contenido.repaint();
     }
 
     @SuppressWarnings("unchecked")
@@ -314,16 +324,6 @@ public class ProfesorGI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostrarPanel(JPanel p) {
-        p.setSize(1280, 560);
-        p.setLocation(0, 0);
-
-        this.contenido.removeAll();
-        this.contenido.add(p, BorderLayout.CENTER);
-        this.contenido.revalidate();
-        this.contenido.repaint();
-    }
-
     private void salirTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseEntered
         this.salirBt.setBackground(new Color(193, 18, 31));
     }//GEN-LAST:event_salirTxtMouseEntered
@@ -334,7 +334,7 @@ public class ProfesorGI extends javax.swing.JFrame {
 
     private void salirTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseClicked
         this.profesor.setEstado(0);
-        this.usuarioDao.actualizar(this.profesor);       
+        this.usuarioDao.actualizar(this.profesor);
         System.exit(0);
     }//GEN-LAST:event_salirTxtMouseClicked
 
@@ -359,7 +359,7 @@ public class ProfesorGI extends javax.swing.JFrame {
     }//GEN-LAST:event_asigTxtMouseExited
 
     private void asigTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asigTxtMouseClicked
-        this.mostrarPanel(new ProfesorAsignacionP(profesorId));
+        this.mostrarPanel(new ProfesorAsignacionP(this.profesorId));
     }//GEN-LAST:event_asigTxtMouseClicked
 
     private void revTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_revTxtMouseEntered
@@ -371,7 +371,7 @@ public class ProfesorGI extends javax.swing.JFrame {
     }//GEN-LAST:event_revTxtMouseExited
 
     private void revTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_revTxtMouseClicked
-        this.mostrarPanel(new ProfesorRevisionP(profesorId));
+        this.mostrarPanel(new ProfesorRevisionP(this.profesorId));
     }//GEN-LAST:event_revTxtMouseClicked
 
     private void asignaturasTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asignaturasTxtMouseEntered
@@ -383,7 +383,7 @@ public class ProfesorGI extends javax.swing.JFrame {
     }//GEN-LAST:event_asignaturasTxtMouseExited
 
     private void asignaturasTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_asignaturasTxtMouseClicked
-        this.mostrarPanel(new ProfesorAsignaturasP(profesorId));
+        this.mostrarPanel(new ProfesorAsignaturasP(this.profesorId));
     }//GEN-LAST:event_asignaturasTxtMouseClicked
 
     private void panelSupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSupMousePressed

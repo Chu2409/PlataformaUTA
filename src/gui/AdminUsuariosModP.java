@@ -29,7 +29,7 @@ public class AdminUsuariosModP extends javax.swing.JPanel {
         this.editar(verificarRol(this.usuarioId));
     }
 
-    public void editar(int usuarioRol) {
+    private void editar(int usuarioRol) {
         if (this.edicion) {
             this.panelTxt.setText("Modificar Usuario");
             this.hacerTxt.setText("Guardar");
@@ -373,7 +373,6 @@ public class AdminUsuariosModP extends javax.swing.JPanel {
             this.emailFd.setText("");
             this.usuarioFd.requestFocus();
         }
-
     }//GEN-LAST:event_hacerTxtMouseClicked
 
 

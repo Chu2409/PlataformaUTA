@@ -10,12 +10,12 @@ import java.util.List;
 
 public class Login extends javax.swing.JFrame {
 
-    int xMouse, yMouse;
-    UsuarioDAO usuarioDao = new UsuarioDAO();
-    UsuarioRolDAO usuarioRolDao = new UsuarioRolDAO();
+    private int xMouse, yMouse;
+    private UsuarioDAO usuarioDao = new UsuarioDAO();
+    private UsuarioRolDAO usuarioRolDao = new UsuarioRolDAO();
 
     public Login() {
-        initComponents();
+        this.initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -390,24 +390,24 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelSupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSupMousePressed
-        xMouse = evt.getX();
-        yMouse = evt.getY();
+        this.xMouse = evt.getX();
+        this.yMouse = evt.getY();
     }//GEN-LAST:event_panelSupMousePressed
 
     private void panelSupMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSupMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
+        this.setLocation(x - this.xMouse, y - this.yMouse);
     }//GEN-LAST:event_panelSupMouseDragged
 
     private void salirTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseEntered
-        salirBt.setBackground(new Color(196, 43, 28));
-        salirTxt.setForeground(Color.white);
+        this.salirBt.setBackground(new Color(196, 43, 28));
+        this.salirTxt.setForeground(Color.white);
     }//GEN-LAST:event_salirTxtMouseEntered
 
     private void salirTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseExited
-        salirBt.setBackground(Color.white);
-        salirTxt.setForeground(Color.black);
+        this.salirBt.setBackground(Color.white);
+        this.salirTxt.setForeground(Color.black);
     }//GEN-LAST:event_salirTxtMouseExited
 
     private void salirTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirTxtMouseClicked
@@ -415,11 +415,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_salirTxtMouseClicked
 
     private void paginaTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paginaTxtMouseEntered
-        paginaBt.setBackground(new Color(248, 200, 99));
+        this.paginaBt.setBackground(new Color(248, 200, 99));
     }//GEN-LAST:event_paginaTxtMouseEntered
 
     private void paginaTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paginaTxtMouseExited
-        paginaBt.setBackground(new Color(252, 230, 182));
+        this.paginaBt.setBackground(new Color(252, 230, 182));
     }//GEN-LAST:event_paginaTxtMouseExited
 
     private void paginaTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paginaTxtMouseClicked
@@ -430,11 +430,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_paginaTxtMouseClicked
 
     private void contactoTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactoTxtMouseEntered
-        contactoBt.setBackground(new Color(248, 200, 99));
+        this.contactoBt.setBackground(new Color(248, 200, 99));
     }//GEN-LAST:event_contactoTxtMouseEntered
 
     private void contactoTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactoTxtMouseExited
-        contactoBt.setBackground(new Color(252, 230, 182));
+        this.contactoBt.setBackground(new Color(252, 230, 182));
     }//GEN-LAST:event_contactoTxtMouseExited
 
     private void contactoTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactoTxtMouseClicked
@@ -445,33 +445,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_contactoTxtMouseClicked
 
     private void usuarioFdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuarioFdMousePressed
-        if (usuarioFd.getText().equals("Ingrese su usuario")) {
-            usuarioFd.setText("");
-            usuarioFd.setForeground(Color.black);
+        if (this.usuarioFd.getText().equals("Ingrese su usuario")) {
+            this.usuarioFd.setText("");
+            this.usuarioFd.setForeground(Color.black);
         }
-        if (String.valueOf(contrasenaFd.getPassword()).isEmpty()) {
-            contrasenaFd.setText("************");
-            contrasenaFd.setForeground(new Color(204, 204, 204));
+        if (String.valueOf(this.contrasenaFd.getPassword()).isEmpty()) {
+            this.contrasenaFd.setText("************");
+            this.contrasenaFd.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_usuarioFdMousePressed
 
     private void contrasenaFdMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contrasenaFdMousePressed
-        if (String.valueOf(contrasenaFd.getPassword()).equals("************")) {
-            contrasenaFd.setText("");
-            contrasenaFd.setForeground(Color.black);
+        if (String.valueOf(this.contrasenaFd.getPassword()).equals("************")) {
+            this.contrasenaFd.setText("");
+            this.contrasenaFd.setForeground(Color.black);
         }
-        if (usuarioFd.getText().isEmpty()) {
-            usuarioFd.setText("Ingrese su usuario");
-            usuarioFd.setForeground(new Color(204, 204, 204));
+        if (this.usuarioFd.getText().isEmpty()) {
+            this.usuarioFd.setText("Ingrese su usuario");
+            this.usuarioFd.setForeground(new Color(204, 204, 204));
         }
     }//GEN-LAST:event_contrasenaFdMousePressed
 
     private void olvideTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_olvideTxtMouseEntered
-        olvideTxt.setForeground(new Color(120, 0, 0));
+        this.olvideTxt.setForeground(new Color(120, 0, 0));
     }//GEN-LAST:event_olvideTxtMouseEntered
 
     private void olvideTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_olvideTxtMouseExited
-        olvideTxt.setForeground(Color.black);
+        this.olvideTxt.setForeground(Color.black);
     }//GEN-LAST:event_olvideTxtMouseExited
 
     private void olvideTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_olvideTxtMouseClicked
@@ -482,22 +482,22 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_olvideTxtMouseClicked
 
     private void ingresarTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarTxtMouseEntered
-        ingresarBt.setBackground(new Color(248, 200, 99));
+        this.ingresarBt.setBackground(new Color(248, 200, 99));
     }//GEN-LAST:event_ingresarTxtMouseEntered
 
     private void ingresarTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarTxtMouseExited
-        ingresarBt.setBackground(new Color(252, 230, 182));
+        this.ingresarBt.setBackground(new Color(252, 230, 182));
     }//GEN-LAST:event_ingresarTxtMouseExited
 
     private void ingresarTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ingresarTxtMouseClicked
-        if (!usuarioFd.getText().equals("Ingrese su usuario") && !String.valueOf(contrasenaFd.getPassword()).equals("************")) {
-            String usuario = usuarioFd.getText();
-            String clave = String.valueOf(contrasenaFd.getPassword());
+        if (!this.usuarioFd.getText().equals("Ingrese su usuario") && !String.valueOf(this.contrasenaFd.getPassword()).equals("************")) {
+            String usuario = this.usuarioFd.getText();
+            String clave = String.valueOf(this.contrasenaFd.getPassword());
             int usuarioId = 0;
             boolean usuarioExist = false;
             boolean claveCorrecta = false;
             int rolId = 0;
-            List<Usuario> usuarios = usuarioDao.seleccionar("");
+            List<Usuario> usuarios = this.usuarioDao.seleccionar("");
             for (Usuario u : usuarios) {
                 if (usuario.equals(u.getUsuario())) {
                     usuarioExist = true;
@@ -506,7 +506,7 @@ public class Login extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Su cuenta ya ha sido iniciada");
                             return;
                         }
-                        List<UsuarioRol> usuariosRoles = usuarioRolDao.seleccionar();
+                        List<UsuarioRol> usuariosRoles = this.usuarioRolDao.seleccionar();
                         usuarioId = u.getId();
                         claveCorrecta = true;
                         JOptionPane.showMessageDialog(null, "Bienvenido: " + u.getNombre());
@@ -523,12 +523,12 @@ public class Login extends javax.swing.JFrame {
             
             if (!usuarioExist) {
                 JOptionPane.showMessageDialog(null, "Usuario no encontrado");
-                usuarioFd.requestFocus();
+                this.usuarioFd.requestFocus();
                 return;
             } else {
                 if (!claveCorrecta) {
                     JOptionPane.showMessageDialog(null, "Clave incorrecta");
-                    contrasenaFd.requestFocus();
+                    this.contrasenaFd.requestFocus();
                     return;
                 }
             }
@@ -538,17 +538,17 @@ public class Login extends javax.swing.JFrame {
                     break;
                 case 1:
                     this.setVisible(false);
-                    EstudianteGI estudiante = new EstudianteGI(usuarioRolDao.obtenerId(usuarioId, rolId));
+                    EstudianteGI estudiante = new EstudianteGI(this.usuarioRolDao.obtenerId(usuarioId, rolId));
                     estudiante.setVisible(true);
                     break;
                 case 2:
                     this.setVisible(false);
-                    ProfesorGI profesor = new ProfesorGI(usuarioRolDao.obtenerId(usuarioId, rolId));
+                    ProfesorGI profesor = new ProfesorGI(this.usuarioRolDao.obtenerId(usuarioId, rolId));
                     profesor.setVisible(true);
                     break;
                 case 3:
                     this.setVisible(false);
-                    AdminGI administrador = new AdminGI(usuarioRolDao.obtenerId(usuarioId, rolId));
+                    AdminGI administrador = new AdminGI(this.usuarioRolDao.obtenerId(usuarioId, rolId));
                     administrador.setVisible(true);
                     break;
             }
@@ -558,11 +558,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_ingresarTxtMouseClicked
 
     private void invitadoTxtMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invitadoTxtMouseEntered
-        invitadoTxt.setForeground(new Color(120, 0, 0));
+        this.invitadoTxt.setForeground(new Color(120, 0, 0));
     }//GEN-LAST:event_invitadoTxtMouseEntered
 
     private void invitadoTxtMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invitadoTxtMouseExited
-        invitadoTxt.setForeground(Color.black);
+        this.invitadoTxt.setForeground(Color.black);
     }//GEN-LAST:event_invitadoTxtMouseExited
 
     private void invitadoTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invitadoTxtMouseClicked

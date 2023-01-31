@@ -42,7 +42,7 @@ public class ProfesorAsignaturasP extends javax.swing.JPanel {
     }
 
     private void listarMaterias() {      
-        List<Integer> materias = this.usuarioMateriaDao.materiasByProfesor(profesorId);
+        List<Integer> materias = this.usuarioMateriaDao.materiasByProfesor(this.profesorId);
 
         this.materiasId = new ArrayList<>();
         this.materiasId.add(0);

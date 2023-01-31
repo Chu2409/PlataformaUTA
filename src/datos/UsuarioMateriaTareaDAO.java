@@ -7,34 +7,6 @@ import java.util.List;
 
 public class UsuarioMateriaTareaDAO {
 
-    public List<UsuarioMateriaTarea> seleccionar() {
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        List<UsuarioMateriaTarea> usuariosTareas = new ArrayList<>();
-
-        try {
-            pst = conn.prepareStatement("SELECT * FROM usuario_materia_tarea");
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                UsuarioMateriaTarea usuarioTarea = new UsuarioMateriaTarea();
-                usuarioTarea.setId(rs.getInt("id"));
-                usuarioTarea.setTareaId(rs.getInt("tarea_id"));
-                usuarioTarea.setNota(rs.getDouble("nota"));
-                usuarioTarea.setEnvio(rs.getString("envio"));
-                usuarioTarea.setUsuarioMateriaId(rs.getInt("usuario_materia_id"));
-                usuariosTareas.add(usuarioTarea);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-        return usuariosTareas;
-    }
-
     public void insertar(UsuarioMateriaTarea usuarioTarea) {
         Connection conn = Conexion.connect();
         PreparedStatement pst = null;
@@ -65,22 +37,6 @@ public class UsuarioMateriaTareaDAO {
             pst.setString(3, usuarioTarea.getEnvio());
             pst.setInt(4, usuarioTarea.getUsuarioMateriaId());
             pst.setInt(5, usuarioTarea.getId());
-            pst.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(pst);
-            Conexion.close(conn);
-        }
-    }
-
-    public void eliminar(int id) {
-        Connection conn = Conexion.connect();
-        PreparedStatement pst = null;
-
-        try {
-            pst = conn.prepareStatement("DELETE FROM usuario_materia_tarea WHERE id = ?");
-            pst.setInt(1, id);
             pst.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -146,8 +102,7 @@ public class UsuarioMateriaTareaDAO {
             Conexion.close(conn);
         }
         return umt;
-    }
-    
+    }    
     
     public List<UsuarioMateriaTarea> tareasByEstudianteId(int estudianteId) {
         Connection conn = Conexion.connect();

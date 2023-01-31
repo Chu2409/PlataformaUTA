@@ -26,7 +26,7 @@ public class AdminAsignaturasP extends javax.swing.JPanel {
     }
 
     private void listarMaterias() {
-        DefaultTableModel model = (DefaultTableModel) infoTb.getModel();
+        DefaultTableModel model = (DefaultTableModel) this.infoTb.getModel();
         model.setRowCount(0);
         
         List<Materia> materias = this.materiaDao.seleccionar("");       
